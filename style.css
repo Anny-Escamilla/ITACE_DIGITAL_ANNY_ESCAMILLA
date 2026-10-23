@@ -1,3 +1,25 @@
+/* =====================================================
+   1. VARIABLES Y BASE
+===================================================== */
+:root {
+    --crema: #f5f3ee;
+    --arena: #e6d9c7;
+    --arena-suave: #e8e5dc;
+    --borde: #d8cbbb;
+    --borde-osc: #c9bba7;
+    --dorado: #cfa44f;
+    --dorado-osc: #92752d;
+    --tinta: #30291f;
+    --texto: #57534d;
+    --vino: #4a121f;
+    --rosa: #9b626b;
+    --azul-osc: #303846;
+    --alto-nav: 76px;
+    --fuente-texto: "Source Sans 3", sans-serif;
+    --fuente-titulo: "Libre Baskerville", Georgia, serif;
+    --fuente-display: "Bebas Neue", sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -8,26 +30,27 @@ html {
     scroll-padding-top: 85px;
 }
 body {
-    font-family: "Source Sans 3", sans-serif;
-    background: linear-gradient(90deg, 
-    #f5f3ee 0%, 
-    #e8e5dc 30%, 
-    #d8cbbb 60%, 
+    font-family: var(--fuente-texto);
+    background: linear-gradient(90deg,
+    #f5f3ee 0%,
+    #e8e5dc 30%,
+    #d8cbbb 60%,
     #f5f7fa 100%);
     color: #252525;
     line-height: 1.7;
 }
-h1,h2,h3 {
-    font-family: "Libre Baskerville", Georgia, serif;
+h1, h2, h3 {
+    font-family: var(--fuente-titulo);
     line-height: 1.25;
 }
-img,video {max-width: 100%;}
-button:focus-visible,
-a:focus-visible {
-    outline: 2px solid #92752d;
-    outline-offset: 4px;
-}
+img, video {max-width: 100%;}
+[hidden] {display: none !important;}
 section {scroll-margin-top: 80px;}
+
+
+/* =====================================================
+   2. NAV
+===================================================== */
 header {
     position: sticky;
     top: 0;
@@ -35,14 +58,14 @@ header {
 }
 .nav {
     width: 100%;
-    min-height: 76px;
+    min-height: var(--alto-nav);
     padding: 12px 5%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: clamp(15px, 2.5vw, 36px);
-    background-color: #e6d9c7;
-    border-bottom: 1px solid #c9bba7;
+    background-color: var(--arena);
+    border-bottom: 1px solid var(--borde-osc);
     box-shadow: 0 4px 18px #0000000a;
     position: sticky;
     top: 0;
@@ -50,8 +73,8 @@ header {
 }
 .logo-itace {
     display: flex;
-    align-items: left;
-    justify-content: left;
+    align-items: center;
+    justify-content: flex-start;
     flex-shrink: 0;
     text-decoration: none;
 }
@@ -63,38 +86,85 @@ header {
     transition: transform .3s ease;
 }
 .logo-itace:hover img {transform: scale(1.07);}
-.nav a {
+.logo-itace::after {display: none;}
+.nav a,
+.menu-mas summary {
     position: relative;
     text-decoration: none;
-    color: #30291f;
-    font-family: "Source Sans 3", sans-serif;
+    color: var(--tinta);
+    font-family: var(--fuente-texto);
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 2px;
     white-space: nowrap;
+    cursor: pointer;
     transition: color .25s ease;
 }
-.nav a::after {
+.nav a::after,
+.menu-mas summary::after {
     content: "";
     position: absolute;
     left: 0;
     bottom: -7px;
     width: 0;
     height: 2px;
-    background-color: #92752d;
+    background-color: var(--dorado-osc);
     transition: width .25s ease;
 }
-.nav a:hover {color: #92752d;}
-.nav a:hover::after {width: 100%;}
+.nav a:hover,
+.nav a[aria-current="page"],
+.menu-mas summary:hover,
+.menu-mas[open] > summary,
+.menu-mas summary.activo {color: var(--dorado-osc);}
+.nav a:hover::after,
+.nav a[aria-current="page"]::after,
+.menu-mas summary:hover::after,
+.menu-mas summary.activo::after {width: 100%;}
+.menu-mas summary {list-style: none;}
+.menu-mas summary::-webkit-details-marker {display: none;}
+.menu-mas-lista {
+    position: absolute;
+    top: 100%;
+    right: 5%;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    background-color: var(--arena);
+    border: 1px solid var(--borde-osc);
+    border-top: none;
+    box-shadow: 0 14px 28px #00000018;
+    z-index: 1001;
+}
+.menu-mas-lista a {
+    padding: 11px 22px;
+    letter-spacing: 1.5px;
+}
+.menu-mas-lista a::after {display: none;}
+.menu-mas-lista a:hover,
+.menu-mas-lista a[aria-current="page"] {background-color: var(--crema);}
 
-/* PORTADA */
+.saltar {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: #111;
+    color: #fff;
+    padding: 10px 16px;
+    z-index: 2000;
+}
+.saltar:focus {left: 10px; top: 10px;}
 
+
+/* =====================================================
+   3. PORTADA
+===================================================== */
 .hero {
     position: relative;
     isolation: isolate;
     width: 100%;
     min-height: 650px;
-    height: min(820px, calc(100vh - 76px));
+    height: min(820px, calc(100vh - var(--alto-nav)));
     display: flex;
     align-items: center;
     padding: 80px 10% 110px;
@@ -111,7 +181,7 @@ header {
     z-index: -1;
     background: linear-gradient(
         90deg,
-        #171b22eF 0%,
+        #171b22ef 0%,
         #252b35d9 42%,
         #30384680 72%,
         #30384630 100%
@@ -128,15 +198,15 @@ header {
     display: inline-block;
     margin-bottom: 24px;
     padding-left: 14px;
-    border-left: 3px solid #cfa44f;
-    font-family: "Bebas Neue", sans-serif;
+    border-left: 3px solid var(--dorado);
+    font-family: var(--fuente-display);
     font-size: 19px;
     letter-spacing: 4px;
-    color: #e6d9c7;
+    color: var(--arena);
 }
 .hero-contenido h1 {
     max-width: 800px;
-    font-family: "Libre Baskerville", Georgia, serif;
+    font-family: var(--fuente-titulo);
     font-size: clamp(43px, 6.5vw, 82px);
     font-weight: 700;
     line-height: 1.12;
@@ -151,7 +221,7 @@ header {
 .hero-contenido p {
     max-width: 600px;
     margin-bottom: 35px;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--fuente-texto);
     font-size: clamp(17px, 1.8vw, 20px);
     line-height: 1.9;
     color: #f0ece5;
@@ -163,12 +233,12 @@ header {
     gap: 22px;
     min-height: 55px;
     padding: 15px 24px;
-    background-color: #cfa44f;
-    border: 1px solid #cfa44f;
+    background-color: var(--dorado);
+    border: 1px solid var(--dorado);
     border-radius: 3px;
     color: #252b35;
     text-decoration: none;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--fuente-texto);
     font-size: 15px;
     font-weight: 600;
     letter-spacing: .5px;
@@ -184,15 +254,14 @@ header {
     transition: transform .3s ease;
 }
 .hero-boton:hover {
-    background-color: #e6d9c7;
-    border-color: #e6d9c7;
+    background-color: var(--arena);
+    border-color: var(--arena);
     color: #252b35;
     transform: translateY(-3px);
     box-shadow: 0 8px 24px #00000030;
 }
 .hero-boton:hover span {transform: translateY(4px);}
 
-/* ANIMACIÓN DE ENTRADA */
 @keyframes hero-aparecer {
     from {
         opacity: 0;
@@ -203,85 +272,93 @@ header {
         transform: translateY(0);
     }
 }
-/* BLOQUES */
 
+
+/* =====================================================
+   4. BLOQUES DE INFORMACIÓN
+===================================================== */
 .info-strip {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    background-color: #f5f3ee;
-    border-bottom: 1px solid #d8cbbb;
+    background-color: var(--crema);
+    border-bottom: 1px solid var(--borde);
 }
 .info-bloque {
     padding: clamp(40px, 6vw, 75px) 9%;
     min-height: 290px;
     transition: background-color .3s ease;
 }
-.info-bloque:first-child {border-right: 1px solid #d8cbbb;}
+.info-bloque:first-child {border-right: 1px solid var(--borde);}
 .info-bloque:hover {background-color: #eee7dc;}
 .info-bloque h2 {
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(25px, 2.5vw, 36px);
     line-height: 1.3;
     margin-bottom: 22px;
-    color: #30291f;
+    color: var(--tinta);
 }
 .info-bloque p {
     max-width: 560px;
-    color: #57534d;
+    color: var(--texto);
     font-size: 16px;
     line-height: 1.9;
 }
 
-/* ==========================
-    TÍTULOS DE LAS SECCIONES
-============================= */
 
+/* =====================================================
+   5. TÍTULOS DE SECCIÓN
+===================================================== */
 .titulo-seccion {
     text-align: center;
     margin-bottom: 55px;
 }
 .titulo-seccion span {
     display: inline-block;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--fuente-display);
     font-size: 17px;
     font-weight: normal;
     letter-spacing: 4px;
-    color: #92752d;
+    color: var(--dorado-osc);
 }
 .titulo-seccion h2 {
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(32px, 4vw, 52px);
     margin-top: 12px;
-    color: #30291f;
-}
-/* HISTORIA */
-.historia-ovalo{
-    max-width:1000px;
-    margin:auto;
-    padding:clamp(22px,4vw,55px);
-    display:grid;
-    grid-template-columns:minmax(260px,.9fr) 1.1fr;
-    gap:clamp(28px,5vw,60px);
-    align-items:center;
-    border-radius:48% 52% 42% 58% / 10% 12% 12% 10%;
-    box-shadow:0 22px 50px #30384622
-}
-.historia-img img{
-    width:100%;
-    object-fit:cover;
-    border-radius:46% 46% 42% 42%;
-}
-.historia-texto h2{text-align:left}
-.historia-texto p{
-    color:#252525;
-    margin-bottom:10px
+    color: var(--tinta);
 }
 
-/* VALORES */
 
+/* =====================================================
+   6. HISTORIA
+===================================================== */
+.seccion {padding: clamp(55px, 7vw, 85px) 6%;}
+.historia-ovalo {
+    max-width: 1000px;
+    margin: auto;
+    padding: clamp(22px, 4vw, 55px);
+    display: grid;
+    grid-template-columns: minmax(260px, .9fr) 1.1fr;
+    gap: clamp(28px, 5vw, 60px);
+    align-items: center;
+    border-radius: 48% 52% 42% 58% / 10% 12% 12% 10%;
+    box-shadow: 0 22px 50px #30384622;
+}
+.historia-img img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 46% 46% 42% 42%;
+}
+.historia-texto h2 {text-align: left;}
+.historia-texto p {
+    color: #252525;
+    margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   7. VALORES 
+===================================================== */
 .seccion-valores {
     padding: clamp(65px, 8vw, 105px) 8%;
-    background-color: #f5f3ee;
+    background-color: var(--crema);
 }
 .valores-grid {
     display: grid;
@@ -305,11 +382,11 @@ header {
     content: "";
     display: block;
     height: 4px;
-    background-color: #cfa44f;
+    background-color: var(--dorado);
 }
 .valores:hover {
     transform: translateY(-7px);
-    border-color: #cfa44f;
+    border-color: var(--dorado);
     box-shadow: 0 16px 35px #30291f16;
 }
 .valores-contenido {padding: clamp(22px, 3vw, 34px);}
@@ -320,25 +397,41 @@ header {
     letter-spacing: 3px;
 }
 .valores-contenido h3 {
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: 25px;
     line-height: 1.4;
     margin: 15px 0;
-    color: #30291f;
+    color: var(--tinta);
 }
 .valores-contenido p {
-    color: #57534d;
+    color: var(--texto);
     font-size: 15px;
     line-height: 1.85;
     margin-bottom: 15px;
 }
 .valores-contenido b {color: #725b25;}
 
-/* ESPECIALIDADES */
+/* Enlace de las tarjetas de acceso del inicio */
+.acceso-enlace {
+    display: inline-block;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--dorado-osc);
+    color: var(--dorado-osc);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s ease, transform .2s ease;
+}
+.acceso-enlace:hover {
+    color: var(--tinta);
+    transform: translateX(4px);
+}
 
+
+/* =====================================================
+   8. ESPECIALIDADES
+===================================================== */
 .especialidades {
     padding: clamp(65px, 8vw, 105px) 8%;
-    background-color: #e8e5dc;
+    background-color: var(--arena-suave);
 }
 .especialidades-grid {
     display: grid;
@@ -350,7 +443,7 @@ header {
     position: relative;
     padding: 35px 28px;
     min-height: 260px;
-    background-color: #e8e5dc;
+    background-color: var(--arena-suave);
     border-right: 1px solid #c8bda9;
     border-bottom: 1px solid #c8bda9;
     transition:
@@ -358,31 +451,32 @@ header {
         box-shadow .3s ease;
 }
 .especialidad:hover {
-    background-color: #f5f3ee;
-    box-shadow: inset 0 3px 0 #cfa44f;
+    background-color: var(--crema);
+    box-shadow: inset 0 3px 0 var(--dorado);
 }
 .especialidad span {
     display: inline-block;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--fuente-display);
     font-size: 28px;
     letter-spacing: 2px;
-    color: #92752d;
+    color: var(--dorado-osc);
 }
 .especialidad h3 {
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(21px, 2vw, 27px);
     line-height: 1.4;
     margin: 20px 0 14px;
-    color: #30291f;
+    color: var(--tinta);
 }
 .especialidad p {
-    color: #57534d;
+    color: var(--texto);
     font-size: 15px;
     line-height: 1.8;
 }
 
-/* INSTALACIONES */
 
+/* =====================================================
+   9. INSTALACIONES
+===================================================== */
 .instalaciones {
     padding: 80px 6%;
     color: #f5f7fa;
@@ -398,17 +492,16 @@ header {
 }
 .instalaciones .titulo-seccion p {
     margin: 0 0 8px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--fuente-display);
     font-size: 17px;
     letter-spacing: 4px;
     color: #725b25;
 }
 .instalaciones .titulo-seccion h2 {
     margin: 0;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(29px, 3.5vw, 45px);
     line-height: 1.3;
-    color: #30291f;
+    color: var(--tinta);
     text-align: left;
 }
 .instalaciones .linea-decor {
@@ -472,7 +565,7 @@ header {
     border: none;
     border-radius: 50%;
     background: transparent;
-    color: #30291f;
+    color: var(--tinta);
     font-family: sans-serif;
     font-size: 48px;
     line-height: 1;
@@ -487,19 +580,15 @@ header {
 }
 .flecha-ft.anterior {left: -8px;}
 .flecha-ft.siguiente {right: -8px;}
-.flecha-ft:focus-visible {
-    outline: 2px solid #30291f;
-    outline-offset: 4px;
-}
 .contador-fts {
     position: absolute;
     right: 0;
     bottom: -32px;
-    font-family: "Source Sans 3", sans-serif;
+    font-family: var(--fuente-texto);
     font-size: 15px;
     font-weight: 600;
     letter-spacing: 2px;
-    color: #30291f;
+    color: var(--tinta);
 }
 .datos-img {
     min-width: 0;
@@ -507,10 +596,9 @@ header {
 }
 .datos-img h3 {
     margin: 0;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(30px, 3.5vw, 46px);
     line-height: 1.3;
-    color: #30291f;
+    color: var(--tinta);
     overflow-wrap: break-word;
 }
 .datos-img .adorno {
@@ -523,12 +611,10 @@ header {
 }
 #descripcion-lugar {
     margin-bottom: 14px;
-    color: #57534d;
+    color: var(--texto);
     font-size: clamp(17px, 1.6vw, 21px);
     line-height: 1.9;
 }
-
-/* Animación de entrada de la imagen */
 
 @keyframes figura-entra {
     from {
@@ -541,8 +627,10 @@ header {
     }
 }
 
-/* UBICACIÓN */
 
+/* =====================================================
+   10. UBICACIÓN
+===================================================== */
 .ubicacion {
     padding: 80px 6%;
     background: linear-gradient(
@@ -551,7 +639,7 @@ header {
         #dceaf2 55%,
         #e9e2f2 100%
     );
-    color: #303846;
+    color: var(--azul-osc);
     overflow: hidden;
 }
 .ubicacion .titulo-seccion {
@@ -563,17 +651,16 @@ header {
 }
 .ubicacion .titulo-seccion p {
     margin: 0 0 8px;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--fuente-display);
     font-size: 17px;
     letter-spacing: 4px;
-    color: #9b626b;
+    color: var(--rosa);
 }
 .ubicacion .titulo-seccion h2 {
     margin: 0;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(29px, 3.5vw, 45px);
     line-height: 1.3;
-    color: #303846;
+    color: var(--azul-osc);
 }
 .ubicacion .linea-decor {
     flex: 1;
@@ -581,7 +668,7 @@ header {
     height: 1px;
     background: linear-gradient(
         90deg,
-        #9b626b,
+        var(--rosa),
         transparent
     );
 }
@@ -596,10 +683,9 @@ header {
 .ubicacion-info {padding: 30px 0;}
 .ubicacion-info h3 {
     margin: 0 0 18px;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(24px, 2.5vw, 34px);
     line-height: 1.4;
-    color: #303846;
+    color: var(--azul-osc);
 }
 .ubicacion-info p {
     margin: 0 0 25px;
@@ -610,9 +696,9 @@ header {
 .boton-mapa {
     display: inline-block;
     padding: 14px 23px;
-    border: 1px solid #9b626b;
+    border: 1px solid var(--rosa);
     border-radius: 8px;
-    background-color: #9b626b;
+    background-color: var(--rosa);
     color: #ffffff;
     font-size: 16px;
     text-decoration: none;
@@ -622,8 +708,8 @@ header {
         box-shadow .25s ease;
 }
 .boton-mapa:hover {
-    background-color: #303846;
-    border-color: #303846;
+    background-color: var(--azul-osc);
+    border-color: var(--azul-osc);
     transform: translateY(-3px);
     box-shadow: 0 8px 20px #30384625;
 }
@@ -643,8 +729,10 @@ header {
     border: 0;
 }
 
-/* NOSOTROS */
 
+/* =====================================================
+   11. NOSOTROS
+===================================================== */
 .nosotros {
     min-height: 600px;
     padding: 90px 8%;
@@ -668,7 +756,7 @@ header {
 }
 .nosotros-texto > span {
     display: inline-block;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--fuente-display);
     font-size: 18px;
     font-weight: normal;
     letter-spacing: 4px;
@@ -676,7 +764,6 @@ header {
 }
 .nosotros-texto h2 {
     max-width: 680px;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(38px, 5vw, 62px);
     line-height: 1.15;
     margin: 22px 0 28px;
@@ -689,12 +776,14 @@ header {
     color: #eeeeee;
 }
 .enlace-nosotros {
+    text-decoration: none;
     display: inline-block;
     color: #ffffff;
     background: transparent;
     border: none;
     border-bottom: 1px solid #ffffff;
     padding-bottom: 8px;
+    font-family: inherit;
     font-size: 16px;
     cursor: pointer;
     transition:
@@ -707,62 +796,41 @@ header {
     border-color: #d4b44c;
     transform: translateY(-3px);
 }
-
-/* FOOTER */
-.pie-pagina{
-    background-color:#4a121f;
-    padding:10px;
-    text-align:center;
-    color:whitesmoke;
-}
-.pie-pagina p{margin-bottom:12px}
-.aviso-fan{color:whitesmoke}
-.enlace-footer{
-    border:0;
-    background:transparent;
-    color:#d4b44c;
-    text-decoration:underline;
-    text-underline-offset:4px;
-    padding:8px;
-    font-size:18px
+.nosotros a{
+    text-decoration: none;
+    color:#9b7c2e;
 }
 
-/* ==================================================
-   HIMNOS DEL ITACE
-================================================== */
 
+/* =====================================================
+   12. HIMNOS
+===================================================== */
 .himnos {
     padding: 85px 6%;
     background: linear-gradient(135deg, #f5f7fa, #dceaf2, #e9e2f2);
-    color: #303846;
+    color: var(--azul-osc);
 }
-
 .himnos .titulo-seccion {
     max-width: 1100px;
     margin: 0 auto 40px;
     text-align: center;
 }
-
 .himnos .titulo-seccion span {
-    color: #9b626b;
-    font-family: "Bebas Neue", sans-serif;
+    color: var(--rosa);
+    font-family: var(--fuente-display);
     font-size: 17px;
     letter-spacing: 4px;
 }
-
 .himnos .titulo-seccion h2 {
     margin: 10px 0;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: clamp(30px, 4vw, 44px);
-    color: #303846;
+    color: var(--azul-osc);
 }
-
 .himnos .titulo-seccion p {
     color: #4d5968;
     font-size: 17px;
     line-height: 1.7;
 }
-
 .himnos-grid {
     max-width: 1100px;
     margin: 0 auto;
@@ -770,7 +838,6 @@ header {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px;
 }
-
 .himno-tarjeta {
     overflow: hidden;
     border: 1px solid #d9e6f2;
@@ -779,71 +846,63 @@ header {
     box-shadow: 0 12px 30px #30384615;
     transition: transform .25s ease, box-shadow .25s ease;
 }
-
 .himno-tarjeta:hover {
     transform: translateY(-5px);
     box-shadow: 0 18px 35px #30384625;
 }
-
 .himno-video {
     width: 100%;
     aspect-ratio: 16 / 9;
     background: #202633;
 }
-
 .himno-video video {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
-
-.himno-info {
-    padding: 24px;
-}
-
+.himno-info {padding: 24px;}
 .himno-etiqueta {
-    color: #9b626b;
-    font-family: "Bebas Neue", sans-serif;
+    color: var(--rosa);
+    font-family: var(--fuente-display);
     letter-spacing: 3px;
 }
-
 .himno-info h3 {
     margin: 10px 0;
-    font-family: "Libre Baskerville", Georgia, serif;
     font-size: 23px;
-    color: #303846;
+    color: var(--azul-osc);
 }
-
 .himno-info p {
     color: #4d5968;
     font-size: 16px;
     line-height: 1.8;
 }
-
+.himno-ver-letra,
 .himno-ver-mas {
     display: inline-block;
     margin-top: 8px;
     padding-bottom: 5px;
-    border-bottom: 1px solid #9b626b;
-    color: #9b626b;
+    border-bottom: 1px solid var(--rosa);
+    color: var(--rosa);
     font-weight: 600;
     text-decoration: none;
     transition: color .2s ease, transform .2s ease;
 }
-
+.himno-ver-letra:hover,
 .himno-ver-mas:hover {
-    color: #303846;
+    color: var(--azul-osc);
     transform: translateX(4px);
 }
 
 
-/* REPRODUCTOR MUSICA */
-
+/* =====================================================
+   13. REPRODUCTOR DE MÚSICA
+===================================================== */
 .reproductor-musical {
     position: fixed;
     z-index: 1000;
     top: 50%;
+    left: 14px;
     transform: translateY(-50%);
     width: 245px;
     padding: 18px;
@@ -883,8 +942,7 @@ header {
     cursor: pointer;
     transition: background .2s ease;
 }
-
-.reproductor-control-ventana:hover {background: #9b626b;}
+.reproductor-control-ventana:hover {background: var(--rosa);}
 .reproductor-contenido {
     margin-top: 16px;
     text-align: center;
@@ -898,7 +956,7 @@ header {
     margin-bottom: 15px;
     border-radius: 14px;
     background: linear-gradient(135deg, #b9ccd9, #e8c7c8, #e9e2f2);
-    color: #303846;
+    color: var(--azul-osc);
     font-size: 55px;
 }
 .reproductor-subtitulo {
@@ -929,7 +987,7 @@ header {
     border: 1px solid #b9ccd9;
     border-radius: 8px;
     background: #f5f7fa;
-    color: #303846;
+    color: var(--azul-osc);
     font-size: 12px;
 }
 .reproductor-botones {
@@ -950,14 +1008,14 @@ header {
     transition: background .2s ease, transform .2s ease;
 }
 .reproductor-botones button:hover {
-    background: #9b626b;
+    background: var(--rosa);
     transform: scale(1.08);
 }
 .reproductor-botones #audio-play {
     width: 46px;
     height: 46px;
     background: #e8c7c8;
-    color: #303846;
+    color: var(--azul-osc);
     font-size: 18px;
 }
 .reproductor-nota {
@@ -970,9 +1028,473 @@ header {
     width: 190px;
     padding: 12px;
 }
-.reproductor-minimizado .reproductor-contenido {
-    display: none;
+.reproductor-minimizado .reproductor-contenido {display: none;}
+.reproductor-minimizado .reproductor-control-ventana {font-size: 20px;}
+
+
+/* =====================================================
+   14. FOOTER
+===================================================== */
+.pie-pagina {
+    background-color: var(--vino);
+    padding: 24px 16px;
+    text-align: center;
+    color: whitesmoke;
 }
-.reproductor-minimizado .reproductor-control-ventana {
-    font-size: 20px;
+.pie-pagina p {margin-bottom: 12px;}
+.pie-pagina a {color: #d4b44c;}
+.aviso-fan {color: whitesmoke;}
+.enlace-footer {
+    border: 0;
+    background: transparent;
+    color: #d4b44c;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    padding: 8px;
+    font-size: 18px;
+}
+
+
+/* =====================================================
+   15. PÁGINAS INTERNAS
+===================================================== */
+.pagina-hero {
+    padding: clamp(45px, 6vw, 70px) 8% clamp(40px, 5vw, 60px);
+    background-color: var(--arena);
+    border-bottom: 1px solid var(--borde-osc);
+}
+.migas {
+    font-size: 14px;
+    margin-bottom: 22px;
+    color: var(--texto);
+}
+.migas a {
+    color: var(--dorado-osc);
+    text-decoration: none;
+    font-weight: 600;
+}
+.migas a:hover {text-decoration: underline;}
+.pagina-hero h1 {
+    font-size: clamp(34px, 5vw, 52px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+    color: var(--tinta);
+    animation: hero-aparecer .6s ease both;
+}
+.pagina-hero p {
+    max-width: 62ch;
+    font-size: 17px;
+    line-height: 1.8;
+    color: #3d382f;
+}
+
+.pagina {padding: clamp(55px, 7vw, 80px) 8%;}
+.pagina.alt {background-color: var(--arena-suave);}
+.pagina h2 {
+    font-size: clamp(27px, 3vw, 34px);
+    margin-bottom: 20px;
+    color: var(--tinta);
+}
+.pagina > p,
+.dos-col p {
+    max-width: 70ch;
+    line-height: 1.85;
+    color: var(--texto);
+    margin-bottom: 16px;
+}
+.pagina ol {
+    margin-left: 22px;
+    line-height: 1.9;
+    color: var(--texto);
+}
+.dos-col {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 50px;
+    align-items: start;
+}
+.dos-col img {
+    width: 100%;
+    display: block;
+    border: 1px solid #e2d8ca;
+    border-radius: 5px;
+}
+.nota-pendiente {
+    background-color: #fff8e1;
+    border-left: 4px solid var(--dorado);
+    padding: 14px 18px;
+    margin-bottom: 35px;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 80ch;
+}
+
+.tarjetas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 24px;
+}
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: #fffdf9;
+    border: 1px solid #e2d8ca;
+    border-radius: 5px;
+    box-shadow: 0 8px 25px #30291f08;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+.tarjeta:hover {
+    transform: translateY(-7px);
+    border-color: var(--dorado);
+    box-shadow: 0 16px 35px #30291f16;
+}
+.tarjeta img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+.tarjeta-cuerpo {padding: clamp(22px, 3vw, 30px);}
+.tarjeta-cuerpo h3 {
+    font-size: 23px;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    color: var(--tinta);
+}
+.tarjeta-cuerpo p {
+    color: var(--texto);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+.tarjeta-cuerpo a {color: var(--dorado-osc); font-weight: 600;}
+.tarjeta-meta {
+    display: block;
+    margin-bottom: 8px;
+    font-family: var(--fuente-display);
+    font-size: 17px;
+    letter-spacing: 3px;
+    color: var(--dorado-osc);
+}
+.tarjeta.pendiente {
+    border-style: dashed;
+    border-color: var(--borde-osc);
+}
+.tarjeta audio {width: 100%; margin: 6px 0 14px;}
+
+.boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 13px 26px;
+    background-color: var(--dorado);
+    border: 1px solid var(--dorado);
+    border-radius: 3px;
+    color: #252b35;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: .5px;
+    transition:
+        background-color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+.boton:hover {
+    background-color: var(--arena);
+    border-color: var(--arena);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px #00000020;
+}
+
+/* Buscador */
+.buscador {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+.buscador label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--tinta);
+}
+.buscador input,
+.buscador select {
+    min-width: 240px;
+    padding: 12px 14px;
+    background-color: #fffdf9;
+    border: 1px solid var(--borde-osc);
+    border-radius: 3px;
+    font: inherit;
+    font-size: 15px;
+    color: #252525;
+}
+.buscador button,
+.filtros button {
+    padding: 12px 22px;
+    background-color: #fffdf9;
+    color: var(--tinta);
+    border: 1px solid var(--tinta);
+    border-radius: 3px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .25s ease, color .25s ease;
+}
+.buscador button {align-self: flex-end;}
+.buscador button:hover,
+.filtros button:hover,
+.filtros button.activo {
+    background-color: var(--tinta);
+    color: #ffffff;
+}
+.filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+}
+.sin-resultados {
+    padding: 20px 0;
+    font-weight: 600;
+    color: var(--tinta);
+}
+
+/* Galería */
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+.galeria-grid figure {
+    overflow: hidden;
+    background-color: #fffdf9;
+    border: 1px solid #e2d8ca;
+    border-radius: 5px;
+}
+.galeria-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+}
+.galeria-grid figure:hover img {transform: scale(1.05);}
+.galeria-grid figcaption {
+    position: relative;
+    padding: 14px 18px;
+    font-size: 15px;
+    color: var(--texto);
+    background-color: #fffdf9;
+}
+
+/* Preguntas frecuentes */
+.faq {max-width: 850px;}
+.faq details {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--borde-osc);
+}
+.faq summary {
+    cursor: pointer;
+    font-family: var(--fuente-titulo);
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: var(--tinta);
+    transition: color .25s ease;
+}
+.faq summary::marker {color: var(--dorado-osc);}
+.faq summary:hover {color: var(--dorado-osc);}
+.faq details p {
+    margin-top: 14px;
+    line-height: 1.85;
+    color: var(--texto);
+}
+.faq details a {color: var(--dorado-osc); font-weight: 600;}
+
+/* Contacto */
+.contacto-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 50px;
+    align-items: start;
+}
+.contacto-datos dt {
+    margin-top: 18px;
+    font-weight: 600;
+    color: var(--dorado-osc);
+}
+.contacto-datos dt:first-child {margin-top: 0;}
+.contacto-datos dd {line-height: 1.7; color: var(--texto);}
+.contacto-datos a {color: var(--dorado-osc); font-weight: 600;}
+.mapa-marco iframe {
+    display: block;
+    width: 100%;
+    height: 420px;
+    border: 5px solid #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 15px 40px #30384620;
+}
+
+
+/* =====================================================
+   16. ACCESIBILIDAD Y MOVIMIENTO REDUCIDO
+===================================================== */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--dorado);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {scroll-behavior: auto;}
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+
+/* =====================================================
+   17. RESPONSIVE
+===================================================== */
+@media (max-width: 1000px) {
+    .valores-grid,
+    .especialidades-grid {grid-template-columns: repeat(2, minmax(0, 1fr));}
+    .nav a,
+    .menu-mas summary {letter-spacing: 1.5px;}
+}
+
+@media (max-width: 900px) {
+    html {scroll-padding-top: 130px;}
+    section {scroll-margin-top: 120px;}
+
+    .nav {
+        flex-wrap: wrap;
+        gap: 8px 22px;
+        padding: 10px 4%;
+    }
+
+    .hero {
+        min-height: 560px;
+        padding: 70px 7% 90px;
+    }
+
+    .info-strip {grid-template-columns: 1fr;}
+    .info-bloque {min-height: 0;}
+    .info-bloque:first-child {
+        border-right: none;
+        border-bottom: 1px solid var(--borde);
+    }
+
+    .historia-ovalo {
+        grid-template-columns: 1fr;
+        border-radius: 28px;
+    }
+    .historia-img img {border-radius: 24px;}
+
+    .instalaciones .titulo-seccion,
+    .ubicacion .titulo-seccion {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+    .instalaciones .linea-decor,
+    .ubicacion .linea-decor {
+        flex: none;
+        width: 100%;
+    }
+    .instalaciones-fts {grid-template-columns: 1fr;}
+    .marco {max-width: 300px; margin: 0 auto;}
+    .datos-img {text-align: center;}
+
+    .ubicacion-contenido {grid-template-columns: 1fr;}
+    .mapa-contenedor {height: 340px;}
+
+    .himnos-grid {grid-template-columns: 1fr;}
+
+    .dos-col,
+    .contacto-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .dos-col img {max-width: 360px;}
+}
+
+@media (max-width: 700px) {
+
+    .reproductor-musical {
+        top: auto;
+        bottom: 12px;
+        left: 12px;
+        transform: none;
+        width: min(230px, calc(100vw - 24px));
+        padding: 14px;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+    .reproductor-musical.reproductor-minimizado {width: 170px;}
+}
+
+@media (max-width: 600px) {
+    .nav a,
+    .menu-mas summary {
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+    .nav {gap: 8px 16px;}
+    .logo-itace img {width: 56px; height: 42px;}
+
+    .menu-mas-lista {
+        left: 0;
+        right: 0;
+        min-width: 0;
+        max-height: calc(100vh - 150px);
+        overflow-y: auto;
+        text-align: center;
+    }
+
+    .hero {
+        min-height: 500px;
+        padding: 60px 6% 80px;
+    }
+    .hero-contenido h1 {letter-spacing: -1px;}
+    .hero-boton {width: 100%;}
+
+    .valores-grid,
+    .especialidades-grid {grid-template-columns: 1fr;}
+    .especialidad {
+        border-right: none;
+        min-height: 0;
+    }
+
+    .zona-ft {padding: 0 30px;}
+    .flecha-ft.anterior {left: -4px;}
+    .flecha-ft.siguiente {right: -4px;}
+
+    .mapa-contenedor,
+    .mapa-marco iframe {height: 290px;}
+
+    .nosotros {
+        min-height: 480px;
+        padding: 70px 6%;
+    }
+
+    .buscador input,
+    .buscador select {min-width: 100%;}
+    .buscador > div {width: 100%;}
+    .buscador button {width: 100%;}
+
+    .tarjetas-grid {grid-template-columns: 1fr;}
 }
