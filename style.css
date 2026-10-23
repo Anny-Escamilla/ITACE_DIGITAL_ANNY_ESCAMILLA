@@ -1,0 +1,978 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 85px;
+}
+body {
+    font-family: "Source Sans 3", sans-serif;
+    background: linear-gradient(90deg, 
+    #f5f3ee 0%, 
+    #e8e5dc 30%, 
+    #d8cbbb 60%, 
+    #f5f7fa 100%);
+    color: #252525;
+    line-height: 1.7;
+}
+h1,h2,h3 {
+    font-family: "Libre Baskerville", Georgia, serif;
+    line-height: 1.25;
+}
+img,video {max-width: 100%;}
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #92752d;
+    outline-offset: 4px;
+}
+section {scroll-margin-top: 80px;}
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav {
+    width: 100%;
+    min-height: 76px;
+    padding: 12px 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: clamp(15px, 2.5vw, 36px);
+    background-color: #e6d9c7;
+    border-bottom: 1px solid #c9bba7;
+    box-shadow: 0 4px 18px #0000000a;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.logo-itace {
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    flex-shrink: 0;
+    text-decoration: none;
+}
+.logo-itace img {
+    display: block;
+    width: 70px;
+    height: 52px;
+    object-fit: contain;
+    transition: transform .3s ease;
+}
+.logo-itace:hover img {transform: scale(1.07);}
+.nav a {
+    position: relative;
+    text-decoration: none;
+    color: #30291f;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    transition: color .25s ease;
+}
+.nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 0;
+    height: 2px;
+    background-color: #92752d;
+    transition: width .25s ease;
+}
+.nav a:hover {color: #92752d;}
+.nav a:hover::after {width: 100%;}
+
+/* PORTADA */
+
+.hero {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    min-height: 650px;
+    height: min(820px, calc(100vh - 76px));
+    display: flex;
+    align-items: center;
+    padding: 80px 10% 110px;
+    background-image: url("img/instalaciones/portada-itace.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+        90deg,
+        #171b22eF 0%,
+        #252b35d9 42%,
+        #30384680 72%,
+        #30384630 100%
+    );
+}
+.hero-contenido {
+    width: 100%;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+    animation: hero-aparecer .8s ease both;
+}
+.hero-etiqueta {
+    display: inline-block;
+    margin-bottom: 24px;
+    padding-left: 14px;
+    border-left: 3px solid #cfa44f;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 19px;
+    letter-spacing: 4px;
+    color: #e6d9c7;
+}
+.hero-contenido h1 {
+    max-width: 800px;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(43px, 6.5vw, 82px);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -2px;
+    color: #ffffff;
+    margin-bottom: 26px;
+}
+.hero-contenido h1 span {
+    display: block;
+    color: #d4b44c;
+}
+.hero-contenido p {
+    max-width: 600px;
+    margin-bottom: 35px;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: clamp(17px, 1.8vw, 20px);
+    line-height: 1.9;
+    color: #f0ece5;
+}
+.hero-boton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    min-height: 55px;
+    padding: 15px 24px;
+    background-color: #cfa44f;
+    border: 1px solid #cfa44f;
+    border-radius: 3px;
+    color: #252b35;
+    text-decoration: none;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    transition:
+        background-color .3s ease,
+        color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+}
+.hero-boton span {
+    font-size: 22px;
+    line-height: 1;
+    transition: transform .3s ease;
+}
+.hero-boton:hover {
+    background-color: #e6d9c7;
+    border-color: #e6d9c7;
+    color: #252b35;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px #00000030;
+}
+.hero-boton:hover span {transform: translateY(4px);}
+
+/* ANIMACIÓN DE ENTRADA */
+@keyframes hero-aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* BLOQUES */
+
+.info-strip {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background-color: #f5f3ee;
+    border-bottom: 1px solid #d8cbbb;
+}
+.info-bloque {
+    padding: clamp(40px, 6vw, 75px) 9%;
+    min-height: 290px;
+    transition: background-color .3s ease;
+}
+.info-bloque:first-child {border-right: 1px solid #d8cbbb;}
+.info-bloque:hover {background-color: #eee7dc;}
+.info-bloque h2 {
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(25px, 2.5vw, 36px);
+    line-height: 1.3;
+    margin-bottom: 22px;
+    color: #30291f;
+}
+.info-bloque p {
+    max-width: 560px;
+    color: #57534d;
+    font-size: 16px;
+    line-height: 1.9;
+}
+
+/* ==========================
+    TÍTULOS DE LAS SECCIONES
+============================= */
+
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 55px;
+}
+.titulo-seccion span {
+    display: inline-block;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 17px;
+    font-weight: normal;
+    letter-spacing: 4px;
+    color: #92752d;
+}
+.titulo-seccion h2 {
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(32px, 4vw, 52px);
+    margin-top: 12px;
+    color: #30291f;
+}
+/* HISTORIA */
+.historia-ovalo{
+    max-width:1000px;
+    margin:auto;
+    padding:clamp(22px,4vw,55px);
+    display:grid;
+    grid-template-columns:minmax(260px,.9fr) 1.1fr;
+    gap:clamp(28px,5vw,60px);
+    align-items:center;
+    border-radius:48% 52% 42% 58% / 10% 12% 12% 10%;
+    box-shadow:0 22px 50px #30384622
+}
+.historia-img img{
+    width:100%;
+    object-fit:cover;
+    border-radius:46% 46% 42% 42%;
+}
+.historia-texto h2{text-align:left}
+.historia-texto p{
+    color:#252525;
+    margin-bottom:10px
+}
+
+/* VALORES */
+
+.seccion-valores {
+    padding: clamp(65px, 8vw, 105px) 8%;
+    background-color: #f5f3ee;
+}
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    align-items: stretch;
+}
+.valores {
+    position: relative;
+    overflow: hidden;
+    background-color: #fffdf9;
+    border: 1px solid #e2d8ca;
+    border-radius: 5px;
+    box-shadow: 0 8px 25px #30291f08;
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+}
+.valores::before {
+    content: "";
+    display: block;
+    height: 4px;
+    background-color: #cfa44f;
+}
+.valores:hover {
+    transform: translateY(-7px);
+    border-color: #cfa44f;
+    box-shadow: 0 16px 35px #30291f16;
+}
+.valores-contenido {padding: clamp(22px, 3vw, 34px);}
+.valores-contenido small {
+    color: #9b7c2e;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.valores-contenido h3 {
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 25px;
+    line-height: 1.4;
+    margin: 15px 0;
+    color: #30291f;
+}
+.valores-contenido p {
+    color: #57534d;
+    font-size: 15px;
+    line-height: 1.85;
+    margin-bottom: 15px;
+}
+.valores-contenido b {color: #725b25;}
+
+/* ESPECIALIDADES */
+
+.especialidades {
+    padding: clamp(65px, 8vw, 105px) 8%;
+    background-color: #e8e5dc;
+}
+.especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid #c8bda9;
+    border-bottom: 1px solid #c8bda9;
+}
+.especialidad {
+    position: relative;
+    padding: 35px 28px;
+    min-height: 260px;
+    background-color: #e8e5dc;
+    border-right: 1px solid #c8bda9;
+    border-bottom: 1px solid #c8bda9;
+    transition:
+        background-color .3s ease,
+        box-shadow .3s ease;
+}
+.especialidad:hover {
+    background-color: #f5f3ee;
+    box-shadow: inset 0 3px 0 #cfa44f;
+}
+.especialidad span {
+    display: inline-block;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #92752d;
+}
+.especialidad h3 {
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(21px, 2vw, 27px);
+    line-height: 1.4;
+    margin: 20px 0 14px;
+    color: #30291f;
+}
+.especialidad p {
+    color: #57534d;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+/* INSTALACIONES */
+
+.instalaciones {
+    padding: 80px 6%;
+    color: #f5f7fa;
+    overflow: hidden;
+}
+.instalaciones .titulo-seccion {
+    max-width: 1100px;
+    margin: 0 auto 55px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    text-align: left;
+}
+.instalaciones .titulo-seccion p {
+    margin: 0 0 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 17px;
+    letter-spacing: 4px;
+    color: #725b25;
+}
+.instalaciones .titulo-seccion h2 {
+    margin: 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(29px, 3.5vw, 45px);
+    line-height: 1.3;
+    color: #30291f;
+    text-align: left;
+}
+.instalaciones .linea-decor {
+    flex: 1;
+    min-width: 30px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        #ebbc32,
+        transparent
+    );
+}
+.instalaciones-fts {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(260px, .9fr) minmax(300px, 1.1fr);
+    align-items: center;
+    gap: clamp(35px, 7vw, 85px);
+}
+.zona-ft {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 34px;
+    min-width: 0;
+}
+.marco {
+    width: 100%;
+    max-width: 340px;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    overflow: hidden;
+    border: 5px solid #ffffff12;
+    border-radius: 50%;
+    background-color: #dceaf2;
+    box-shadow:
+        0 0 0 1px #e8c7c844,
+        0 15px 45px #00000030;
+}
+#ft {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 50%;
+    animation: figura-entra .45s ease;
+}
+.flecha-ft {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #30291f;
+    font-family: sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+        color .2s ease,
+        transform .2s ease;
+}
+.flecha-ft:hover {
+    color: #bca961;
+    transform: translateY(-50%) scale(1.12);
+}
+.flecha-ft.anterior {left: -8px;}
+.flecha-ft.siguiente {right: -8px;}
+.flecha-ft:focus-visible {
+    outline: 2px solid #30291f;
+    outline-offset: 4px;
+}
+.contador-fts {
+    position: absolute;
+    right: 0;
+    bottom: -32px;
+    font-family: "Source Sans 3", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #30291f;
+}
+.datos-img {
+    min-width: 0;
+    padding: 8px 0;
+}
+.datos-img h3 {
+    margin: 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(30px, 3.5vw, 46px);
+    line-height: 1.3;
+    color: #30291f;
+    overflow-wrap: break-word;
+}
+.datos-img .adorno {
+    margin: 20px 0;
+    color: #ab8630;
+    font-size: 15px;
+    letter-spacing: 2px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#descripcion-lugar {
+    margin-bottom: 14px;
+    color: #57534d;
+    font-size: clamp(17px, 1.6vw, 21px);
+    line-height: 1.9;
+}
+
+/* Animación de entrada de la imagen */
+
+@keyframes figura-entra {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* UBICACIÓN */
+
+.ubicacion {
+    padding: 80px 6%;
+    background: linear-gradient(
+        135deg,
+        #f5f7fa 0%,
+        #dceaf2 55%,
+        #e9e2f2 100%
+    );
+    color: #303846;
+    overflow: hidden;
+}
+.ubicacion .titulo-seccion {
+    max-width: 1100px;
+    margin: 0 auto 45px;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+.ubicacion .titulo-seccion p {
+    margin: 0 0 8px;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 17px;
+    letter-spacing: 4px;
+    color: #9b626b;
+}
+.ubicacion .titulo-seccion h2 {
+    margin: 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(29px, 3.5vw, 45px);
+    line-height: 1.3;
+    color: #303846;
+}
+.ubicacion .linea-decor {
+    flex: 1;
+    min-width: 30px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        #9b626b,
+        transparent
+    );
+}
+.ubicacion-contenido {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(250px, 0.8fr) minmax(0, 1.4fr);
+    align-items: center;
+    gap: 40px;
+}
+.ubicacion-info {padding: 30px 0;}
+.ubicacion-info h3 {
+    margin: 0 0 18px;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(24px, 2.5vw, 34px);
+    line-height: 1.4;
+    color: #303846;
+}
+.ubicacion-info p {
+    margin: 0 0 25px;
+    color: #4d5968;
+    font-size: 18px;
+    line-height: 1.8;
+}
+.boton-mapa {
+    display: inline-block;
+    padding: 14px 23px;
+    border: 1px solid #9b626b;
+    border-radius: 8px;
+    background-color: #9b626b;
+    color: #ffffff;
+    font-size: 16px;
+    text-decoration: none;
+    transition:
+        background-color .25s ease,
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+.boton-mapa:hover {
+    background-color: #303846;
+    border-color: #303846;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px #30384625;
+}
+.mapa-contenedor {
+    width: 100%;
+    height: 420px;
+    overflow: hidden;
+    border: 5px solid #ffffff;
+    border-radius: 22px;
+    background-color: #dceaf2;
+    box-shadow: 0 15px 40px #30384620;
+}
+.mapa-contenedor iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* NOSOTROS */
+
+.nosotros {
+    min-height: 600px;
+    padding: 90px 8%;
+    display: flex;
+    align-items: center;
+    background-image:
+        linear-gradient(
+            #0000008c,
+            #0000008c
+        ),
+        url("img/instalaciones/itace-nosotros.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.nosotros-texto {
+    max-width: 720px;
+    margin-left: 0;
+    padding: 10px 0;
+    color: #ffffff;
+}
+.nosotros-texto > span {
+    display: inline-block;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 4px;
+    color: #d4b44c;
+}
+.nosotros-texto h2 {
+    max-width: 680px;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.15;
+    margin: 22px 0 28px;
+}
+.nosotros-texto p {
+    max-width: 650px;
+    font-size: 17px;
+    line-height: 1.9;
+    margin-bottom: 30px;
+    color: #eeeeee;
+}
+.enlace-nosotros {
+    display: inline-block;
+    color: #ffffff;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    padding-bottom: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition:
+        color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+}
+.enlace-nosotros:hover {
+    color: #d4b44c;
+    border-color: #d4b44c;
+    transform: translateY(-3px);
+}
+
+/* FOOTER */
+.pie-pagina{
+    background-color:#4a121f;
+    padding:10px;
+    text-align:center;
+    color:whitesmoke;
+}
+.pie-pagina p{margin-bottom:12px}
+.aviso-fan{color:whitesmoke}
+.enlace-footer{
+    border:0;
+    background:transparent;
+    color:#d4b44c;
+    text-decoration:underline;
+    text-underline-offset:4px;
+    padding:8px;
+    font-size:18px
+}
+
+/* ==================================================
+   HIMNOS DEL ITACE
+================================================== */
+
+.himnos {
+    padding: 85px 6%;
+    background: linear-gradient(135deg, #f5f7fa, #dceaf2, #e9e2f2);
+    color: #303846;
+}
+
+.himnos .titulo-seccion {
+    max-width: 1100px;
+    margin: 0 auto 40px;
+    text-align: center;
+}
+
+.himnos .titulo-seccion span {
+    color: #9b626b;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 17px;
+    letter-spacing: 4px;
+}
+
+.himnos .titulo-seccion h2 {
+    margin: 10px 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: clamp(30px, 4vw, 44px);
+    color: #303846;
+}
+
+.himnos .titulo-seccion p {
+    color: #4d5968;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.himnos-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+}
+
+.himno-tarjeta {
+    overflow: hidden;
+    border: 1px solid #d9e6f2;
+    border-radius: 20px;
+    background: #ffffff;
+    box-shadow: 0 12px 30px #30384615;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.himno-tarjeta:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 18px 35px #30384625;
+}
+
+.himno-video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #202633;
+}
+
+.himno-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.himno-info {
+    padding: 24px;
+}
+
+.himno-etiqueta {
+    color: #9b626b;
+    font-family: "Bebas Neue", sans-serif;
+    letter-spacing: 3px;
+}
+
+.himno-info h3 {
+    margin: 10px 0;
+    font-family: "Libre Baskerville", Georgia, serif;
+    font-size: 23px;
+    color: #303846;
+}
+
+.himno-info p {
+    color: #4d5968;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+.himno-ver-mas {
+    display: inline-block;
+    margin-top: 8px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #9b626b;
+    color: #9b626b;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.himno-ver-mas:hover {
+    color: #303846;
+    transform: translateX(4px);
+}
+
+
+/* REPRODUCTOR MUSICA */
+
+.reproductor-musical {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 245px;
+    padding: 18px;
+    border: 1px solid #b9ccd9;
+    border-radius: 20px;
+    background: linear-gradient(160deg, #303846, #202633);
+    color: #f5f7fa;
+    box-shadow: 0 15px 40px #00000035;
+    transition: width .25s ease, padding .25s ease;
+}
+.reproductor-encabezado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+.reproductor-marca {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.reproductor-icono {
+    color: #e8c7c8;
+    font-size: 24px;
+}
+.reproductor-control-ventana {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #b9ccd9;
+    border-radius: 50%;
+    background: transparent;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+
+.reproductor-control-ventana:hover {background: #9b626b;}
+.reproductor-contenido {
+    margin-top: 16px;
+    text-align: center;
+}
+.reproductor-portada {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / .75;
+    margin-bottom: 15px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #b9ccd9, #e8c7c8, #e9e2f2);
+    color: #303846;
+    font-size: 55px;
+}
+.reproductor-subtitulo {
+    margin: 0;
+    color: #b9ccd9;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+.reproductor-contenido h3 {
+    margin: 8px 0;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+}
+#cancion-estado {
+    min-height: 18px;
+    color: #d9e6f2;
+    font-size: 12px;
+}
+.reproductor-contenido label {
+    display: block;
+    margin: 15px 0 7px;
+    text-align: left;
+    font-size: 12px;
+}
+#lista-canciones {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b9ccd9;
+    border-radius: 8px;
+    background: #f5f7fa;
+    color: #303846;
+    font-size: 12px;
+}
+.reproductor-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 17px 0;
+}
+.reproductor-botones button {
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    color: #f5f7fa;
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+}
+.reproductor-botones button:hover {
+    background: #9b626b;
+    transform: scale(1.08);
+}
+.reproductor-botones #audio-play {
+    width: 46px;
+    height: 46px;
+    background: #e8c7c8;
+    color: #303846;
+    font-size: 18px;
+}
+.reproductor-nota {
+    margin-bottom: 0;
+    color: #b9ccd9;
+    font-size: 11px;
+    line-height: 1.6;
+}
+.reproductor-musical.reproductor-minimizado {
+    width: 190px;
+    padding: 12px;
+}
+.reproductor-minimizado .reproductor-contenido {
+    display: none;
+}
+.reproductor-minimizado .reproductor-control-ventana {
+    font-size: 20px;
+}

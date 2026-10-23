@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html {scroll-behavior: smooth;}
+body {
+    font-family: "Libre Baskerville", italic;
+    background-color: #f5f3ee;
+    color: #111;
+}
+header {
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+.nav{
+    padding: 15px;
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    background-color: #e6d9c7;
+    border-top: 1px solid #222;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav a {
+    text-decoration: none;
+    color: #111;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    transition: 0.3s;
+}
+.nav a:hover {color: #cfa44f;}
+.hero {
+    height: 850px;
+    width: auto;
+    position: relative;
+    background-image: url("img/portada itace.png");
+    background-size: cover;
+    background-position: center;
+    display: flex;
+}
+.info-strip {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid #222;
+}
+.info-bloque {
+    padding: 70px 8%;
+    min-height: 280px;
+}
+.info-bloque:first-child {border-right: 1px solid #222;}
+.info-bloque h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+.info-bloque p {
+    color: #444;
+    font-size: 16px;
+    line-height: 1.8;
+}
+.titulo-seccion {
+    text-align: center;
+    margin-bottom: 55px;
+}
+.titulo-seccion span {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #92752d;
+}
+.titulo-seccion h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 55px;
+    margin-top: 12px;
+}
+
+/* valores */
+.seccion-valores {padding: 100px 8%;}
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+.valores {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.valores:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px #00000014;
+}
+.valores-contenido {padding: 30px;}
+.valores-contenido small {
+    color: #9b7c2e;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 3px;
+}
+.valores-contenido h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    line-height: 1.2;
+    margin: 15px 0;
+}
+.valores-contenido p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+/*especialidades*/
+.especialidades {
+    background-color: #e8e5dc;
+    padding: 100px 8%;
+}
+.especialidades-grid {
+    display: grid;
+    grid-template-columns: repeat(3,3fr);
+    grid-template-rows: repeat(3,3fr);
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+}
+.especialidad {
+    padding: 40px 30px;
+    min-height: 250px;
+    border-right: 1px solid #aaa;
+}
+.especialidad span {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    color: #92752d;
+}
+.especialidad h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 28px;
+    margin: 25px 0 15px;
+}
+.especialidad p {
+    color: #555;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   INSTALACIONES
+========================= */
+.seccion-instalaciones {
+    padding: 100px 8%;
+    border-right: 1px solid #aaa;}
+
+.instalaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+.instalaciones {
+    background-color: #ddd;
+    border: 1px solid #ddd;
+    transition: transform 0.3s, box-shadow 0.5s;
+}
+.instalaciones:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px #0e0b0b14;
+}
+.instalaciones-imagen {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+.instalaciones-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+.instalaciones:hover img {transform: scale(1.05);}
+.instalaciones-contenido {padding: 30px;}
+.instalaciones-contenido h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 27px;
+    line-height: 1.2;
+    margin: 15px 0;
+}
+.instalaciones-contenido p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+.plantas-fotos {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+    width: 100%;
+}
+.plantas-fotos img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+}
+/*Nosotros*/
+.nosotros {
+    min-height: 550px;
+    display: flex;
+    align-items: center;
+    background-image:
+        linear-gradient(
+            #0000008c,
+            #0000008c
+        ),
+        url("img/itace-nosotros.png");
+    background-size: cover;
+    background-position: center;
+}
+.nosotros-texto {
+    max-width: 700px;
+    margin-left: 8%;
+    color: white;
+}
+.nosotros-texto > span {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 4px;
+    color: #d4b44c;
+}
+.nosotros-texto h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 65px;
+    line-height: 1;
+    margin: 20px 0 30px;
+}
+.nosotros-texto p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #eee;
+}
+.nosotros-texto a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid white;
+    padding-bottom: 8px;
+    font-weight: bold;
+}
+.nosotros-texto a:hover {
+    color: #d4b44c;
+    border-color: #d4b44c;
+}
